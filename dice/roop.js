@@ -26,6 +26,10 @@ function cancelRoop() {
 
     // 進行状況テキストを更新
     progressText.textContent = "キャンセルされました。";
+
+    // ボタン切り替え（キャンセル→スタート）
+    document.getElementById("cancelButton").style.display = "none";
+    document.getElementById("startButton").style.display = "inline";
 }
 
 
@@ -36,6 +40,10 @@ function roop() {
 
     // 入力が不正の場合中断
     if (!validateInputs()) return 0;
+
+    // ボタン切り替え
+    document.getElementById("startButton").style.display = "none";
+    document.getElementById("cancelButton").style.display = "inline";
 
     const roopCount = parseInt(document.getElementById('roopCount').value, 10);
     if (isNaN(roopCount) || roopCount <= 0) return;

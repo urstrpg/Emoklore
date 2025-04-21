@@ -16,6 +16,7 @@
 function skillRoll() {
   const levelElem = document.getElementById('level');
   const judgeElem = document.getElementById('judge');
+
   if (!levelElem || !judgeElem) {
     console.error("level または judge の要素が見つかりません");
     return 0;

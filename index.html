@@ -60,11 +60,13 @@ No001 2025/0/ うるす
 
   <div id="errorDiv" style="color: red; margin-top: 10px; font-weight: bold;"></div>
 
-  <button onclick="roop()">平均をシミュレート</button>
-  <progress id="progressBar" value="0" max="100" style="width: 50%; display: none;"></progress>
-  <p id="progressText"></p>
   <h2>1Rの平均与ダメージ: <span id="avrDamage">---</span></h2>
-  <button onclick="cancelRoop()">キャンセル</button>
+
+  <p id="progressText" style="font-weight: bold;"></p>
+  <progress id="progressBar" value="0" max="100" style="width: 50%; display: none;"></progress>
+  <button id="startButton" onclick="roop()">平均をシミュレート</button>
+  <button id="cancelButton" onclick="cancelRoop()" style="display: none;">キャンセル</button>
+
   <!--
   <h2>成功数: <span id="successes">---</span></h2>
   <h2>ダメージ: <span id="damage">---</span></h2>
