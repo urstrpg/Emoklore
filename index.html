@@ -33,12 +33,12 @@ No001 2025/04/21 うるす
   <!-- 各種攻撃タイプの入力欄（最初は非表示） -->
   <div id="martialArtsFields" style="display:none;">
     <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponDamage" value="5"></label><br>
-    <label>〈ストレングス〉の技能レベル（1～3の整数）: <input type="number" id="str"></label><br>
+    <label>〈ストレングス〉の技能レベル（1～3の整数）: <input type="number" id="str" value="3"></label><br>
   </div>
   
   <div id="mysteryFields" style="display:none;">
     <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponDamage" value="5"></label><br>
-    <label>〈ストレングス〉の技能レベル（1～3の整数）: <input type="number" id="str"></label><br>
+    <label>〈ストレングス〉の技能レベル（1～3の整数）: <input type="number" id="str" value="3"></label><br>
   </div>
   
   <div id="throwFields" style="display:none;">
@@ -67,7 +67,7 @@ No001 2025/04/21 うるす
         const selected = document.getElementById("attackType").value;
 
         // 一旦すべての項目を非表示
-        const allFields = ["martialArtsFields", "mysteryFields", "throwFields", "shootingFields", "otherFields"];
+        const allFields = ["martialArtsFields", "mysteryFields", "throwFields", "shootingFields"];
         allFields.forEach(id => {
           document.getElementById(id).style.display = "none";
         });
