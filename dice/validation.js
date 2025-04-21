@@ -23,7 +23,7 @@ function validateInputs() {
     const str = parseInt(document.getElementById('str').value);
     const weapon = document.getElementById('weaponAttackPower').value.trim();
 
-    const weaponRegex = /^[\d]+([Dd][\d]+)?$/;
+    const weaponRegex = /^[0-9]+([Dd][0-9]+)?$/;
 
     if (!attackType || attackType === "none") {
         showError("攻撃種別を選択してください。");
