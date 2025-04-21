@@ -86,3 +86,14 @@ function rollDice(level, judge) {
   return successes;
 }
 
+function getActiveWeaponAttackPower() {
+  const selected = document.getElementById("attackType").value;
+  const field = document.querySelector(`#${selected}Fields input[id="weaponAttackPower"]`);
+  return field ? field.value : "";
+}
+
+function getActiveStrValue() {
+  const selected = document.getElementById("attackType").value;
+  const field = document.querySelector(`#${selected}Fields input[id="str"]`);
+  return field ? parseInt(field.value, 10) : 0;
+}
