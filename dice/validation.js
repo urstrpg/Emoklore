@@ -23,7 +23,7 @@ function validateInputs() {
     const str = parseInt(document.getElementById('str').value);
     const weapon = document.getElementById('weaponAttackPower').value.trim();
 
-    const weaponRegex = /^[\dDd+]+$/;
+    const weaponRegex = /^[\d]+([Dd][\d]+)?$/;
 
     if (!attackType || attackType === "none") {
         showError("攻撃種別を選択してください。");
@@ -41,7 +41,7 @@ function validateInputs() {
     }
 
     if (isNaN(str) || str < 1 || str > 3) {
-        showError("ストレングスは1～3の整数で入力してください。");
+        showError("〈ストレングス〉の技能レベルは1～3の整数で入力してください。");
         return false;
     }
 
