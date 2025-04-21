@@ -28,7 +28,6 @@ function skillRoll() {
 
   // 成功数を算出
   const successes = rollDice(level, judge);
-  // document.getElementById('successes').textContent = successes;
 
   // 成功数が0以下の時、処理をスキップ
   let damage = 0;
@@ -49,9 +48,13 @@ function skillRoll() {
 
     // ダメージを算出
     damage = damageRoll(successes, skillAttackPower);
+
+    // 〈★奥義〉で連撃を適用する場合、ダブル成功以上でもう一度ダメージを算出
+    if (successes >= 2 && skillAttackPower == 6 && document.getElementById('rengekiFlg')?.checked) {
+      damage += damageRoll(successes, skillAttackPower);
+    }
   }
 
-  // document.getElementById('damage').textContent = damage;
   // ダメージを返却
   return damage;
 }

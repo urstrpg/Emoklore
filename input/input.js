@@ -35,3 +35,14 @@ function getActiveStrValue() {
     }
     return value;
 }
+
+// ループ中、入力枠を非活性にする
+function setInputsDisabled(disabled) {
+    const inputs = document.querySelectorAll('input, select, button');
+    inputs.forEach(input => {
+        // 「キャンセル」ボタンだけは無効化しない or 有効化しないように調整
+        if (input.id !== 'cancelButton') {
+            input.disabled = disabled;
+        }
+    });
+}

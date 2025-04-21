@@ -38,6 +38,9 @@ function roop() {
     // キャンセルフラグをリセット
     isCancelled = false;
 
+    // 入力枠を非活性
+    setInputsDisabled(true);
+
     // 入力が不正の場合中断
     if (!validateInputs()) return 0;
 
@@ -82,6 +85,7 @@ function roop() {
             sumDamage += skillRoll();
             count++;
         }
+
         const percent = Math.floor((count / roopCount) * 100);
         progressBar.value = percent;
         progressText.textContent = `${percent}% 完了`;
@@ -89,13 +93,18 @@ function roop() {
         if (count < roopCount) {
             setTimeout(runBatch, 0);
         } else {
+
             // ダメージの平均値を算出
             const avg = (sumDamage / roopCount).toFixed(2);
             avrOutput.textContent = avg;
             progressText.textContent = "完了！";
+
             // ボタン切り替え
             document.getElementById("cancelButton").style.display = "none";
             document.getElementById("startButton").style.display = "inline";
+
+            // 入力枠を有効化
+            setInputsDisabled(false);
         }
     }
 
