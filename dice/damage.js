@@ -19,7 +19,7 @@ function damageRoll() {
     const str = parseInt(document.getElementById('str').value);
 
     // 技能ダメージを算出
-    let damege = damageRoll(successes, power);
+    let damege = skillDamageRoll(successes, power);
 
     // 武器攻撃力を加算
     damege += weaponDamageRoll(document.getElementById('weaponDamage').value);
@@ -40,7 +40,7 @@ function damageRoll() {
  * @param { 攻撃力 } power
  */
 // ***************************************************
-function damageRoll(successes, power) {
+function skillDamageRoll(successes, power) {
     let damage = 0;
 
     // 成功数の回数ダイスロールを行い、技能のダメージを算出
