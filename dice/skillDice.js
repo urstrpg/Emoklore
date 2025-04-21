@@ -21,7 +21,12 @@ function skillRoll() {
     const successes = rollDice(level, judge);
 
   document.getElementById('successes').textContent = successes;
-  damageRoll();
+  if (successes > 0){
+    damageRoll();
+  } else {
+    document.getElementById('damege').textContent = 0;
+  }
+
   }
 
 

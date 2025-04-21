@@ -15,11 +15,10 @@
 // ダメージ算出
 function damageRoll() {
     const successes = parseInt(document.getElementById('successes').textContent);
-    const power = parseInt(document.getElementById('power').value);
     const str = parseInt(document.getElementById('str').value);
 
     // 技能ダメージを算出
-    let damege = skillDamageRoll(successes, power);
+    let damege = skillDamageRoll(successes, 6);
 
     // 武器攻撃力を加算
     damege += weaponDamageRoll(document.getElementById('weaponDamage').value);

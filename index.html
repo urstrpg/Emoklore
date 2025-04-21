@@ -66,7 +66,15 @@ No001 2025/04/21 うるす
     function toggleInput() {
         const selected = document.getElementById("attackType").value;
 
-        // 一旦すべての項目を非表示
+        // 存在するフィールドIDを列挙
+        const allFields = [
+          "martialArtsFields",
+          "mysteryFields",
+          "throwFields",
+          "shootingFields"
+          ];
+
+        // すべてのフィールドを非表示
         allFields.forEach(id => {
           const elem = document.getElementById(id);
           if (elem) {
@@ -75,26 +83,12 @@ No001 2025/04/21 うるす
         });
 
         // 選択された技能に応じて表示
-        switch (selected) {
-          case "martialArts":
-            document.getElementById("martialArtsFields").style.display = "block";
-            break;
-          case "mystery":
-            document.getElementById("mysteryFields").style.display = "block";
-            break;
-          case "throw":
-            document.getElementById("throwFields").style.display = "block";
-            break;
-          case "shooting":
-            document.getElementById("shootingFields").style.display = "block";
-            break;
-          /**
-           * case "other":
-           * document.getElementById("otherFields").style.display = "block";
-           * break;
-           */
+        const selectedId = selected + "Fields";
+        const selectedElem = document.getElementById(selectedId);
+        if (selectedElem) {
+          selectedElem.style.display = "block";
+          }
         }
-    }
     </script>
 </body>
 </html> 
