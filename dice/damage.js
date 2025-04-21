@@ -23,11 +23,12 @@ function damageRoll(successes, skillAttackPower) {
   if (skillAttackPower > 0) {
     damage = skillDamageRoll(successes, skillAttackPower);
   } else {
-    damage = skillAttackPower;
+    damage = successes;
   }
 
   // 武器攻撃力を加算
-  damage += weaponDamageRoll(getActiveWeaponAttackPower());
+  const weaponDamage = weaponDamageRoll(getActiveWeaponAttackPower());
+  damage += weaponDamage;
 
   // 〈ストレングス〉の技能レベルが1～3の場合、ダメージを加算
   if (1 <= str && str <= 3) {

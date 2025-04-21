@@ -16,12 +16,22 @@
 function getActiveWeaponAttackPower() {
     const selected = document.getElementById("attackType").value;
     const field = document.querySelector(`#${selected}Fields input[id="weaponAttackPower"]`);
-    return field ? field.value : "";
+    const value = field ? field.value.trim() : "";
+    if (value === "") {
+        showError("武器攻撃力が入力されていません。");
+        return "";
+    }
+    return value;
 }
 
 // 〈ストレングス〉の技能レベル
 function getActiveStrValue() {
     const selected = document.getElementById("attackType").value;
     const field = document.querySelector(`#${selected}Fields input[id="str"]`);
-    return field ? parseInt(field.value, 10) : 0;
+    const value = field ? parseInt(field.value, 10) : 0;
+    if (isNaN(value)) {
+        showError("〈ストレングス〉の技能レベルが不正です。");
+        return 0;
+    }
+    return value;
 }

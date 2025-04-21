@@ -12,11 +12,13 @@ No001 2025/0/ うるす
 
 <head>
   <meta charset="UTF-8">
-  <title>エモクロアTRPG：判定ツール</title>
+  <title>簡易戦闘シミュレーション</title>
 </head>
 
 <body>
-  <h1>判定ツール</h1>
+  <h1>エモクロアTRPG：簡易戦闘シミュレーションツール</h1>
+  <label>ループ回数<input type="number" id="roopCount" value="10000"></label><br>
+
   <label>攻撃種別:
     <select id="attackType" onchange="toggleInput()">
       <option value="none">選択してください</option>
@@ -56,14 +58,22 @@ No001 2025/0/ うるす
   </div>
   -->
 
-  <button onclick="skillRoll()">判定する</button>
+  <div id="errorDiv" style="color: red; margin-top: 10px; font-weight: bold;"></div>
+
+  <button onclick="roop()">平均をシミュレート</button>
+  <progress id="progressBar" value="0" max="100" style="width: 50%; display: none;"></progress>
+  <p id="progressText"></p>
+  <h2>1Rの平均与ダメージ: <span id="avrDamage">---</span></h2>
+  <button onclick="cancelRoop()">キャンセル</button>
+  <!--
   <h2>成功数: <span id="successes">---</span></h2>
   <h2>ダメージ: <span id="damage">---</span></h2>
-
+　-->
 
   <!-- JavaScriptファイルを読み込む -->
-  <script src="dice/input.js"></script>
-  <script src="dice/validation.js"></script>
+  <script src="input/input.js"></script>
+  <script src="validate/validation.js"></script>
+  <script src="dice/roop.js"></script>
   <script src="dice/skillDice.js"></script>
   <script src="dice/damage.js"></script>
   <script>

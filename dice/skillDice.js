@@ -14,16 +14,12 @@
 
 // 技能判定
 function skillRoll() {
-
-  // 入力が不正の場合中断
-  if (!validateInputs()) return;
-
   const level = parseInt(document.getElementById('level').value);
   const judge = parseInt(document.getElementById('judge').value);
 
   // 成功数を算出
   const successes = rollDice(level, judge);
-  document.getElementById('successes').textContent = successes;
+  // document.getElementById('successes').textContent = successes;
 
   // 成功数が0以下の時、処理をスキップ
   let damage = 0;
@@ -46,7 +42,9 @@ function skillRoll() {
     damage = damageRoll(successes, skillAttackPower);
   }
 
-  document.getElementById('damage').textContent = damage;
+  // document.getElementById('damage').textContent = damage;
+  // ダメージを返却
+  return damage;
 }
 
 
