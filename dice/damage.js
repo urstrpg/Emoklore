@@ -18,17 +18,17 @@ function damageRoll() {
     const str = parseInt(document.getElementById('str').value);
 
     // 技能ダメージを算出
-    let damege = skillDamageRoll(successes, 6);
+    let damage = skillDamageRoll(successes, 6);
 
     // 武器攻撃力を加算
-    damege += weaponDamageRoll(document.getElementById('weaponDamage').value);
+    damage += weaponDamageRoll(document.getElementById('weaponDamage').value);
 
     // 〈ストレングス〉の技能レベルが1～3の場合、ダメージを加算
     if (1 <= str && str <= 3){
-        damege += str
+        damage += str
     }
 
-  document.getElementById('damege').textContent = damege;
+  document.getElementById('damage').textContent = damage;
   }
 
 
