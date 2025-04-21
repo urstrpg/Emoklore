@@ -67,9 +67,11 @@ No001 2025/04/21 うるす
         const selected = document.getElementById("attackType").value;
 
         // 一旦すべての項目を非表示
-        const allFields = ["martialArtsFields", "mysteryFields", "throwFields", "shootingFields"];
         allFields.forEach(id => {
-          document.getElementById(id).style.display = "none";
+          const elem = document.getElementById(id);
+          if (elem) {
+            elem.style.display = "none";
+          }
         });
 
         // 選択された技能に応じて表示
