@@ -27,7 +27,7 @@ function cancelRoop() {
     // 進行状況テキストを更新
     progressText.textContent = "キャンセルされました。";
 
-    // ボタン切り替え（キャンセル→スタート）
+    // ボタン切り替え
     document.getElementById("cancelButton").style.display = "none";
     document.getElementById("startButton").style.display = "inline";
 }
@@ -93,6 +93,9 @@ function roop() {
             const avg = (sumDamage / roopCount).toFixed(2);
             avrOutput.textContent = avg;
             progressText.textContent = "完了！";
+            // ボタン切り替え
+            document.getElementById("cancelButton").style.display = "none";
+            document.getElementById("startButton").style.display = "inline";
         }
     }
 
