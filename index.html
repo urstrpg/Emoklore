@@ -1,22 +1,23 @@
-
 <!--
  ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 
 更新履歴
-No001 2025/04/21 うるす
+No001 2025/0/ うるす
 
 △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 -->
 
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <title>エモクロアTRPG：判定ツール</title>
 </head>
+
 <body>
   <h1>判定ツール</h1>
-  <label>攻撃種別: 
+  <label>攻撃種別:
     <select id="attackType" onchange="toggleInput()">
       <option value="none">選択してください</option>
       <option value="martialArts">〈＊格闘〉または〈武術〉</option>
@@ -26,69 +27,72 @@ No001 2025/04/21 うるす
       <!-- <option value="other">その他</option> -->
     </select>
   </label><br>
-  
+
   <label>技能レベル（1～3の整数）: <input type="number" id="level" value="3"></label><br>
   <label>判定値(1～9の整数): <input type="number" id="judge" value="5"></label><br>
 
   <!-- 各種攻撃タイプの入力欄（最初は非表示） -->
   <div id="martialArtsFields" style="display:none;">
-    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponDamage" value="5"></label><br>
+    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponAttackPower" value="5"></label><br>
     <label>〈ストレングス〉の技能レベル（1～3の整数）: <input type="number" id="str" value="3"></label><br>
   </div>
-  
+
   <div id="mysteryFields" style="display:none;">
-    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponDamage" value="5"></label><br>
+    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponAttackPower" value="5"></label><br>
     <label>〈ストレングス〉の技能レベル（1～3の整数）: <input type="number" id="str" value="3"></label><br>
   </div>
-  
+
   <div id="throwFields" style="display:none;">
-    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponDamage" value="5"></label><br>
+    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponAttackPower" value="5"></label><br>
   </div>
-  
+
   <div id="shootingFields" style="display:none;">
-    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponDamage" value="5"></label><br>
+    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponAttackPower" value="5"></label><br>
   </div>
 
   <!--
   <div id="otherFields" style="display:none;">
-    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponDamage" value="5"></label><br>
+    <label>武器攻撃力（整数または1D2形式）: <input type="text" id="weaponAttackPower" value="5"></label><br>
   </div>
   -->
 
   <button onclick="skillRoll()">判定する</button>
   <h2>成功数: <span id="successes">---</span></h2>
-  <h2>ダメージ: <span id="damege">---</span></h2>
+  <h2>ダメージ: <span id="damage">---</span></h2>
+
 
   <!-- JavaScriptファイルを読み込む -->
+  <script src="dice/validation.js"></script>
   <script src="dice/skillDice.js"></script>
   <script src="dice/damage.js"></script>
   <script>
     function toggleInput() {
-        const selected = document.getElementById("attackType").value;
+      const selected = document.getElementById("attackType").value;
 
-        // 存在するフィールドIDを列挙
-        const allFields = [
-          "martialArtsFields",
-          "mysteryFields",
-          "throwFields",
-          "shootingFields"
-          ];
+      // 存在するフィールドIDを列挙
+      const allFields = [
+        "martialArtsFields",
+        "mysteryFields",
+        "throwFields",
+        "shootingFields"
+      ];
 
-        // すべてのフィールドを非表示
-        allFields.forEach(id => {
-          const elem = document.getElementById(id);
-          if (elem) {
-            elem.style.display = "none";
-          }
-        });
-
-        // 選択された技能に応じて表示
-        const selectedId = selected + "Fields";
-        const selectedElem = document.getElementById(selectedId);
-        if (selectedElem) {
-          selectedElem.style.display = "block";
-          }
+      // すべてのフィールドを非表示
+      allFields.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) {
+          elem.style.display = "none";
         }
-    </script>
+      });
+
+      // 選択された技能に応じて表示
+      const selectedId = selected + "Fields";
+      const selectedElem = document.getElementById(selectedId);
+      if (selectedElem) {
+        selectedElem.style.display = "block";
+      }
+    }
+  </script>
 </body>
-</html> 
+
+</html>
