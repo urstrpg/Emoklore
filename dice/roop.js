@@ -38,11 +38,11 @@ function roop() {
     // キャンセルフラグをリセット
     isCancelled = false;
 
-    // 入力枠を非活性
-    setInputsDisabled(true);
-
     // 入力が不正の場合中断
     if (!validateInputs()) return 0;
+
+    // 入力枠を非活性
+    setInputsDisabled(true);
 
     // ボタン切り替え
     document.getElementById("startButton").style.display = "none";
