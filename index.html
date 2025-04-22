@@ -18,102 +18,32 @@
     <div class="main-area">
       <div id="header-placeholder"></div>
 
-      <div id="app">
-        <div class="container">
-          <h2>合計ダメージと1Rの平均与ダメージを算出</h2>
-          <h3>ラウンド数を設定：<input type="number" id="loopCount" value="100000"></h3>
+      <div id="footer-placeholder"></div>
 
-          <h3>共鳴者の行動
-            <!-- プレイヤー追加ボタン -->
-            <button id="addPlayerButton">共鳴者を追加</button>
-          </h3>
-          <div id="playerInputsContainer"></div>
+      <script>
+        // ヘッダーとフッターを読み込む
+        window.addEventListener('DOMContentLoaded', () => {
+          fetch('/TRPG/components/header.html')
+            .then(res => res.text())
+            .then(html => {
+              document.getElementById('header-placeholder').innerHTML = html;
+            });
 
-          <template id="playerTemplate">
-            <fieldset class="playerBlock">
-              <legend></legend>
-              <label>攻撃種別：
-                <select class="attackType">
-                  <option value="none">選択してください</option>
-                  <option value="martialArts">〈＊格闘〉または〈武術〉：【成功数】D3 + 武器攻撃力 +〈ストレングス〉の技能レベル</option>
-                  <option value="mystery">〈★奥義〉：【成功数】D6 + 武器攻撃力 +〈ストレングス〉の技能レベル</option>
-                  <option value="throw">〈＊投擲〉：【成功数】+ 武器攻撃力</option>
-                  <option value="shooting">〈★射撃〉：【成功数】+ 武器攻撃力</option>
-                  <!-- その内追加したい <option value="other">その他</option> -->
-                </select>
-              </label><br>
+          fetch('/TRPG/components/footer.html')
+            .then(res => res.text())
+            .then(html => {
+              document.getElementById('footer-placeholder').innerHTML = html;
+            });
 
-              <label>技能レベル（1～3の整数）：：<input type="number" class="level" value="3"></label><br>
-              <label>判定値(1～9の整数)：<input type="number" class="judge" value="5"></label><br>
-
-              <!-- 各種攻撃タイプの入力欄（最初は非表示） -->
-              <div class="typeFields martialArtsFields" style="display:none;">
-                <label>武器攻撃力（整数またはダイス形式（例：2D6、1D2））：<input type="text" class="weaponAttackPower" value="5"></label><br>
-                <label>〈ストレングス〉の技能レベル（1～3の整数）：<input type="number" class="str" value="3"></label><br>
-              </div>
-
-              <div class="typeFields mysteryFields" style="display:none;">
-                <label>武器攻撃力（整数またはダイス形式（例：2D6、1D2））：<input type="text" class="weaponAttackPower" value="5"></label><br>
-                <label>〈ストレングス〉の技能レベル（1～3の整数）：：<input type="number" class="str" value="3"></label><br>
-                <label>
-                  特殊効果:連撃使用チェック：
-                  <input type="checkbox" id="rengekiFlg">
-                </label><br>
-              </div>
-
-              <div class="typeFields throwFields" style="display:none;">
-                <label>武器攻撃力（整数またはダイス形式（例：2D6、1D2））：<input type="text" class="weaponAttackPower" value="5"></label><br>
-              </div>
-
-              <div class="typeFields shootingFields" style="display:none;">
-                <label>武器攻撃力（整数またはダイス形式（例：2D6、1D2））：<input type="text" class="weaponAttackPower" value="5"></label><br>
-              </div>
-
-            </fieldset>
-          </template>
-
-          <div id="errorDiv"></div>
-
-          <h3>シミュレーション
-            <button id="startButton" onclick="loop()">スタート</button>
-            <button id="cancelButton" onclick="cancelLoop()" style="display: none;">キャンセル</button>
-          </h3>
-
-          <p id="progressText"></p>
-          <progress id="progressBar" value="0" max="100" style="display: none;"></progress>
-          <h3>合計ダメージと1Rの平均与ダメージ</h3>
-          <div id="avrDamage"></div>
-
-        </div>
-
-        <div id="footer-placeholder"></div>
-
-        <!-- JavaScriptファイルを読み込む -->
-        <script type="module" src="./js/main.js"></script>
-        <script>
-          // ヘッダーとフッターを読み込む
-          window.addEventListener('DOMContentLoaded', () => {
-            fetch('/TRPG/components/header.html')
-              .then(res => res.text())
-              .then(html => {
-                document.getElementById('header-placeholder').innerHTML = html;
-              });
-
-            fetch('/TRPG/components/footer.html')
-              .then(res => res.text())
-              .then(html => {
-                document.getElementById('footer-placeholder').innerHTML = html;
-              });
-
-            fetch('/TRPG/components/sidebar.html')
-              .then(res => res.text())
-              .then(html => {
-                document.getElementById('sidebar-placeholder').innerHTML = html;
-              });
-          });
-        </script>
-      </div>
+          fetch('/TRPG/components/sidebar.html')
+            .then(res => res.text())
+            .then(html => {
+              document.getElementById('sidebar-placeholder').innerHTML = html;
+            });
+        });
+      </script>
     </div>
+  </div>
 </body>
 
 </html>
