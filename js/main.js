@@ -23,7 +23,7 @@ window.cancelLoop = cancelLoop;
 // html
 // サイドバーを読み込み
 window.addEventListener("DOMContentLoaded", () => {
-    fetch('components/sidebar.html')
+    fetch('/TRPG/components/sidebar.html')
         .then(res => res.text())
         .then(html => {
             document.getElementById("sidebar-placeholder").innerHTML = html;
