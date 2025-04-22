@@ -13,6 +13,7 @@ html {
     padding: 0;
     height: 100%;
     font-family: sans-serif;
+    background-color: #fff;
 }
 
 header,
@@ -26,47 +27,41 @@ footer {
 
 .layout {
     display: flex;
-    flex-direction: row;
     min-height: 100vh;
 }
 
 #sidebar-placeholder {
     width: 200px;
-    min-height: 100vh;
-    background-color: #eee;
-    box-sizing: border-box;
+    background-color: #f0f0f0;
     padding: 20px;
+    box-sizing: border-box;
     flex-shrink: 0;
 }
 
 .main-area {
     display: flex;
     flex-direction: column;
+    width: 100%;
     min-height: 100vh;
 }
 
-#header-placeholder {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    background-color: #f0f0f0;
-    text-align: center;
-}
-
+#header-placeholder,
 #footer-placeholder {
+    width: 100%;
     background-color: #f0f0f0;
-    padding: 10px;
     text-align: center;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 .container {
-    flex-grow: 1;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 30px 20px;
+    flex-grow: 1;
     box-sizing: border-box;
+    padding: 30px 20px;
 }
 
 
