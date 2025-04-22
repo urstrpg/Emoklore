@@ -1,3 +1,5 @@
+import { getActiveStrValue, getActiveWeaponAttackPower } from '../util/input.js';
+import { randomInt } from '../util/util.js';
 
 // ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 /**
@@ -15,7 +17,7 @@
 // ***************************************************
 
 // ダメージ算出
-function damageRoll(successes, skillAttackPower) {
+export function damageRoll(successes, skillAttackPower) {
   const str = getActiveStrValue();
 
   // 技能ダメージを算出
@@ -94,18 +96,4 @@ function weaponDamageRoll(weaponAttackPower) {
   }
 
   return damage;
-}
-
-
-// ***************************************************
-/**
- * ランダムなダイス目の獲得
- * @param { 最大値 } max
- * @returns roll
- */
-// ***************************************************
-
-function randomInt(max) {
-  let roll = Math.floor(Math.random() * max) + 1;
-  return roll;
 }

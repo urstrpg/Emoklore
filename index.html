@@ -17,7 +17,7 @@ No001 2025/0/ うるす
 
 <body>
   <h1>エモクロアTRPG：簡易戦闘シミュレーションツール</h1>
-  <label>ループ回数<input type="number" id="roopCount" value="100000"></label><br>
+  <label>ループ回数<input type="number" id="loopCount" value="100000"></label><br>
 
   <label>攻撃種別:
     <select id="attackType" onchange="toggleInput()">
@@ -62,15 +62,12 @@ No001 2025/0/ うるす
 
   <p id="progressText" style="font-weight: bold;"></p>
   <progress id="progressBar" value="0" max="100" style="width: 50%; display: none;"></progress>
-  <button id="startButton" onclick="roop()">平均をシミュレート</button>
-  <button id="cancelButton" onclick="cancelRoop()" style="display: none;">キャンセル</button>
+  <button id="startButton" onclick="loop()">平均をシミュレート</button>
+  <button id="cancelButton" onclick="cancelLoop()" style="display: none;">キャンセル</button>
 
   <!-- JavaScriptファイルを読み込む -->
-  <script src="input/input.js"></script>
-  <script src="validate/validation.js"></script>
-  <script src="dice/roop.js"></script>
-  <script src="dice/skillDice.js"></script>
-  <script src="dice/damage.js"></script>
+  <script type="module" src="main.js"></script>
+
   <script>
     function toggleInput() {
       const selected = document.getElementById("attackType").value;

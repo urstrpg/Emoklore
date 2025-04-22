@@ -1,3 +1,4 @@
+import { damageRoll } from './damage.js';
 
 // ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 /**
@@ -13,17 +14,9 @@
 // ***************************************************
 
 // 技能判定
-function skillRoll() {
-  const levelElem = document.getElementById('level');
-  const judgeElem = document.getElementById('judge');
-
-  if (!levelElem || !judgeElem) {
-    console.error("level または judge の要素が見つかりません");
-    return 0;
-  }
-
-  const level = parseInt(levelElem.value);
-  const judge = parseInt(judgeElem.value);
+export function skillRoll() {
+  const level = parseInt(document.getElementById('level'));
+  const judge = parseInt(document.getElementById('judge'));
 
 
   // 成功数を算出

@@ -1,3 +1,4 @@
+import { setInputsDisabled } from '../util/input.js';
 
 // ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 /**
@@ -15,7 +16,7 @@
 let isCancelled = false;
 
 // キャンセル処理
-function cancelRoop() {
+export function cancelLoop() {
     isCancelled = true;
 
     // キャンセル後の表示処理
@@ -34,7 +35,7 @@ function cancelRoop() {
 
 
 // ループ処理
-function roop() {
+export function loop() {
     // キャンセルフラグをリセット
     isCancelled = false;
 
@@ -48,8 +49,8 @@ function roop() {
     document.getElementById("startButton").style.display = "none";
     document.getElementById("cancelButton").style.display = "inline";
 
-    const roopCount = parseInt(document.getElementById('roopCount').value, 10);
-    if (isNaN(roopCount) || roopCount <= 0) return;
+    const loopCount = parseInt(document.getElementById('loopCount').value, 10);
+    if (isNaN(loopCount) || loopCount <= 0) return;
 
     let sumDamage = 0;
     let count = 0;
@@ -58,12 +59,6 @@ function roop() {
     const progressBar = document.getElementById('progressBar');
     const progressText = document.getElementById('progressText');
     const avrOutput = document.getElementById('avrDamage');
-
-    // 要素が存在するかチェック
-    if (!progressBar || !progressText || !avrOutput) {
-        console.error("必要なHTML要素が見つかりません。", progressBar, progressText, avrOutput);
-        return;
-    }
 
     // 初期設定
     progressBar.style.display = "block";
@@ -79,23 +74,23 @@ function roop() {
             return;
         }
 
-        for (let i = 0; i < batchSize && count < roopCount; i++) {
+        for (let i = 0; i < batchSize && count < loopCount; i++) {
 
             // 算出したダメージを加算
             sumDamage += skillRoll();
             count++;
         }
 
-        const percent = Math.floor((count / roopCount) * 100);
+        const percent = Math.floor((count / loopCount) * 100);
         progressBar.value = percent;
         progressText.textContent = `${percent}% 完了`;
 
-        if (count < roopCount) {
+        if (count < loopCount) {
             setTimeout(runBatch, 0);
         } else {
 
             // ダメージの平均値を算出
-            const avg = (sumDamage / roopCount).toFixed(2);
+            const avg = (sumDamage / loopCount).toFixed(2);
             avrOutput.textContent = avg;
             progressText.textContent = "完了！";
 

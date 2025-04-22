@@ -13,7 +13,7 @@
 // ***************************************************
 
 // 武器攻撃力
-function getActiveWeaponAttackPower() {
+export function getActiveWeaponAttackPower() {
     const selected = document.getElementById("attackType").value;
     const field = document.querySelector(`#${selected}Fields input[id="weaponAttackPower"]`);
     const value = field ? field.value.trim() : "";
@@ -25,7 +25,7 @@ function getActiveWeaponAttackPower() {
 }
 
 // 〈ストレングス〉の技能レベル
-function getActiveStrValue() {
+export function getActiveStrValue() {
     const selected = document.getElementById("attackType").value;
     const field = document.querySelector(`#${selected}Fields input[id="str"]`);
     const value = field ? parseInt(field.value, 10) : 0;
@@ -37,7 +37,7 @@ function getActiveStrValue() {
 }
 
 // ループ中、入力枠を非活性にする
-function setInputsDisabled(disabled) {
+export function setInputsDisabled(disabled) {
     const inputs = document.querySelectorAll('input, select, button');
     inputs.forEach(input => {
         // 「キャンセル」ボタンだけは無効化しない or 有効化しないように調整

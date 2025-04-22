@@ -13,7 +13,7 @@
 // ***************************************************
 
 // バリデーション関数
-function showError(message) {
+export function showError(message) {
     const errorDiv = document.getElementById('errorDiv');
     if (errorDiv) {
         // エラーメッセージを初期化
@@ -25,7 +25,7 @@ function showError(message) {
 }
 
 // バリデーションチェック
-function validateInputs() {
+export function validateInputs() {
 
     // エラーメッセージの初期化
     const errorDiv = document.getElementById('errorDiv');
