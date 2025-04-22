@@ -2,7 +2,7 @@
  ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 
   更新履歴
-  No001 2025/0/22 うるす
+  No001 2025/04/22 うるす
 
 △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 -->
@@ -91,36 +91,35 @@
                 <h3>合計ダメージと1Rの平均与ダメージ</h3>
                 <div id="avrDamage"></div>
 
+                </section>
+                <div id="footer-placeholder"></div>
             </div>
-
-            <div id="footer-placeholder"></div>
-
-            <!-- JavaScriptファイルを読み込む -->
-            <script type="module" src="./js/main.js"></script>
-            <script>
-                // ヘッダーとフッターを読み込む
-                window.addEventListener('DOMContentLoaded', () => {
-                    fetch('components/header.html')
-                        .then(res => res.text())
-                        .then(html => {
-                            document.getElementById('header-placeholder').innerHTML = html;
-                        });
-
-                    fetch('components/footer.html')
-                        .then(res => res.text())
-                        .then(html => {
-                            document.getElementById('footer-placeholder').innerHTML = html;
-                        });
-
-                    fetch('components/sidebar.html')
-                        .then(res => res.text())
-                        .then(html => {
-                            document.getElementById('sidebar-placeholder').innerHTML = html;
-                        });
-                });
-            </script>
         </div>
-    </div>
+
+        <!-- JavaScriptファイルを読み込む -->
+        <script type="module" src="./js/main.js"></script>
+        <script>
+            // ヘッダーとフッターを読み込む
+            window.addEventListener('DOMContentLoaded', () => {
+                fetch('components/header.html')
+                    .then(res => res.text())
+                    .then(html => {
+                        document.getElementById('header-placeholder').innerHTML = html;
+                    });
+
+                fetch('components/footer.html')
+                    .then(res => res.text())
+                    .then(html => {
+                        document.getElementById('footer-placeholder').innerHTML = html;
+                    });
+
+                fetch('components/sidebar.html')
+                    .then(res => res.text())
+                    .then(html => {
+                        document.getElementById('sidebar-placeholder').innerHTML = html;
+                    });
+            });
+        </script>
 </body>
 
 </html>
