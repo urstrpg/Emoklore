@@ -2,7 +2,7 @@
  ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 
   更新履歴
-  No001 2025/0/22 うるす
+  No001 2025/04/22 うるす
 
 △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 -->
@@ -25,11 +25,9 @@
             <section class="page-section active" id="about">
                 <div class="container">
                     <h2>本ツールについて</h2>
-                    <p class="developer">エモクロアTRPGにおける戦闘を試行シミュレーションする非公式ツールです。
-                    </p>
+                    <p class="developer">エモクロアTRPGにおける戦闘を試行シミュレーションする非公式ツールです。</p>
 
-                    <h3>主な機能
-                    </h3>
+                    <h3>主な機能</h3>
                     <ul class="list">
                         <li>ラウンド数と共鳴者の行動を入力し、全体および個別の合計ダメージと1Rの平均ダメージを算出</li>
                     </ul>
@@ -45,7 +43,6 @@
                     <h3>ダイスタス・コモンズ</h3>
                     <ul class="img">
                         <img src="images/dicetousCommons.png" alt="TRPGロゴ">
-
                     </ul>
 
                     <h3>開発・管理</h3>
@@ -54,34 +51,33 @@
                         <p>最終更新：2025年 月 日</p>
                     </div>
                 </div>
-
-                <div id="footer-placeholder"></div>
-
-                <script>
-                    // ヘッダーとフッターを読み込む
-                    window.addEventListener('DOMContentLoaded', () => {
-                        fetch('components/header.html')
-                            .then(res => res.text())
-                            .then(html => {
-                                document.getElementById('header-placeholder').innerHTML = html;
-                            });
-
-                        fetch('components/footer.html')
-                            .then(res => res.text())
-                            .then(html => {
-                                document.getElementById('footer-placeholder').innerHTML = html;
-                            });
-
-                        fetch('components/sidebar.html')
-                            .then(res => res.text())
-                            .then(html => {
-                                document.getElementById('sidebar-placeholder').innerHTML = html;
-                            });
-                    });
-                </script>
             </section>
+            <div id="footer-placeholder"></div>
         </div>
     </div>
+
+    <script>
+        // ヘッダーとフッターを読み込む
+        window.addEventListener('DOMContentLoaded', () => {
+            fetch('components/header.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('header-placeholder').innerHTML = html;
+                });
+
+            fetch('components/footer.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('footer-placeholder').innerHTML = html;
+                });
+
+            fetch('components/sidebar.html')
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('sidebar-placeholder').innerHTML = html;
+                });
+        });
+    </script>
 </body>
 
 </html>
