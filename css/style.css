@@ -64,7 +64,7 @@ footer {
 
 .container {
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     padding: 30px 20px;
     box-sizing: border-box;
     margin: 0 auto;
@@ -155,4 +155,12 @@ button {
 #sidebar a {
     text-decoration: none;
     color: #333;
+}
+
+.developer {
+    margin-left: 3em;
+}
+
+.list {
+    margin-left: 2em;
 }
