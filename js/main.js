@@ -31,7 +31,6 @@ window.addEventListener("DOMContentLoaded", () => {
             // ナビゲーションのクリックイベント
             document.querySelectorAll("#sidebar a").forEach(link => {
                 link.addEventListener("click", e => {
-                    e.preventDefault();
                     const targetId = link.getAttribute("data-target");
                     document.querySelectorAll(".page-section").forEach(section => {
                         section.classList.remove("active");
