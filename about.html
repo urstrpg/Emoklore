@@ -9,7 +9,12 @@
 
 <!DOCTYPE html>
 <html lang="ja">
-<link rel="stylesheet" href="./css/style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TRPGツール</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
 
 <body>
     <div class="layout">
@@ -43,7 +48,6 @@
 
                     </ul>
 
-
                     <h3>開発・管理</h3>
                     <div class="developer">
                         <p>開発者：うるす <a href="https://x.com/Urs_syu_mi" target="_blank">X（旧Twitter）</a></p>
@@ -52,22 +56,23 @@
                 </div>
 
                 <div id="footer-placeholder"></div>
+
                 <script>
                     // ヘッダーとフッターを読み込む
                     window.addEventListener('DOMContentLoaded', () => {
-                        fetch('/TRPG/components/header.html')
+                        fetch('components/header.html')
                             .then(res => res.text())
                             .then(html => {
                                 document.getElementById('header-placeholder').innerHTML = html;
                             });
 
-                        fetch('/TRPG/components/footer.html')
+                        fetch('components/footer.html')
                             .then(res => res.text())
                             .then(html => {
                                 document.getElementById('footer-placeholder').innerHTML = html;
                             });
 
-                        fetch('/TRPG/components/sidebar.html')
+                        fetch('components/sidebar.html')
                             .then(res => res.text())
                             .then(html => {
                                 document.getElementById('sidebar-placeholder').innerHTML = html;
