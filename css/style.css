@@ -17,7 +17,7 @@ html {
 
 header,
 footer {
-    padding: 15px 20px;
+    padding: 15px 15px;
     background-color: #f0f0f0;
     text-align: center;
     font-size: 1rem;
@@ -39,15 +39,14 @@ footer {
     flex-shrink: 0;
 }
 
-/* メイン部分 */
 .main-area {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    min-height: 100vh;
 }
 
-#header-placeholder,
-#footer-placeholder {
+#header-placeholder {
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
@@ -55,7 +54,15 @@ footer {
     text-align: center;
 }
 
+#footer-placeholder {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .container {
+    flex-grow: 1;
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
