@@ -9,13 +9,13 @@
 
 /**
  * バリデーション：エラー表示
- * @param { メッセージ } message
+ * @param { メッセージ } messages
  */
-export function showError(message) {
+export function showError(messages) {
     const errorDiv = document.getElementById('errorDiv');
     if (errorDiv) {
         // エラーメッセージをHTMLに表示
-        errorDiv.textContent = message;
+        errorDiv.innerHTML = messages.map(msg => `<div>${msg}</div>`).join('');
     }
 }
 
@@ -42,6 +42,7 @@ function isValidWeaponFormat(value) {
  * @returns
  */
 export function validateInputs() {
+    const loopCount = parseInt(document.getElementById('loopCount').value, 10);
     const attackType = document.getElementById('attackType').value;
     const level = document.getElementById('level').value;
     const judge = document.getElementById('judge').value;
@@ -49,39 +50,44 @@ export function validateInputs() {
     const str = strField ? strField.value : "";
     const weaponField = document.querySelector(`#${attackType}Fields input[id="weaponAttackPower"]`);
     const weapon = weaponField ? weaponField.value.trim() : "";
+    const errors = [];
 
-    // エラー初期化
-    showError("");
+    // ループ関数のチェック
+    if (!/^[1-9][0-9]*$/.test(loopCount)) {
+        errors.push("ループ回数は正の整数で入力してください。")
+    }
 
     // 攻撃種別のチェック
     if (!attackType || attackType === "none") {
-        showError("攻撃種別を選択してください。");
-        return false;
+        errors.push("攻撃種別を選択してください。");
     }
 
     // 技能レベルのチェック（1～3の正の整数）
     if (!isValidPositiveIntegerInRange(level, 3)) {
-        showError("技能レベルは1～3の正の整数で入力してください。");
-        return false;
+        errors.push("技能レベルは1～3の正の整数で入力してください。");
     }
 
     // 判定値のチェック（1～9の正の整数）
     if (!isValidPositiveIntegerInRange(judge, 9)) {
-        showError("判定値は1～9の正の整数で入力してください。");
-        return false;
-    }
-
-    // ストレングスのチェック（存在する場合のみ）
-    if (strField && !isValidPositiveIntegerInRange(str, 3)) {
-        showError("〈ストレングス〉の技能レベルは1～3の正の整数で入力してください。");
-        return false;
+        errors.push("判定値は1～9の正の整数で入力してください。");
     }
 
     // 武器攻撃力のチェック（存在する場合のみ）
     if (weaponField && !isValidWeaponFormat(weapon)) {
-        showError("武器攻撃力は正の整数またはダイス形式（例：2D6、1D2）で入力してください。");
+        errors.push("武器攻撃力は正の整数またはダイス形式（例：2D6、1D2）で入力してください。");
+    }
+
+    // ストレングスのチェック（存在する場合のみ）
+    if (strField && !isValidPositiveIntegerInRange(str, 3)) {
+        errors.push("〈ストレングス〉の技能レベルは1～3の正の整数で入力してください。");
+    }
+
+    if (errors.length > 0) {
+        showError(errors);
         return false;
     }
 
+    // エラーなし
+    showError([]);
     return true;
 }

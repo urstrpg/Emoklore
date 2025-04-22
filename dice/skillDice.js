@@ -12,9 +12,8 @@ import { damageRoll } from './damage.js';
  * @returns damage
  */
 export function skillRoll() {
-  const level = parseInt(document.getElementById('level'));
-  const judge = parseInt(document.getElementById('judge'));
-
+  const level = parseInt(document.getElementById('level').value, 10);
+  const judge = parseInt(document.getElementById('judge').value, 10);
 
   // 成功数を算出
   const successes = rollDice(level, judge);

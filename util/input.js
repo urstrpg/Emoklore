@@ -22,7 +22,7 @@ export function getActiveWeaponAttackPower() {
 }
 
 /**
- * 〈ストレングス〉の技能レベル
+ * 〈ストレングス〉の技能レベルの入力制御
  * @returns value
  */
 export function getActiveStrValue() {
@@ -37,7 +37,7 @@ export function getActiveStrValue() {
 }
 
 /**
- * ループ中、入力枠を非活性にする
+ * 入力枠を非活性
  */
 export function setInputsDisabled(disabled) {
     const inputs = document.querySelectorAll('input, select, button');
@@ -48,4 +48,12 @@ export function setInputsDisabled(disabled) {
             input.disabled = disabled;
         }
     });
+}
+
+/**
+ * ボタン表示の制御
+ */
+export function toggleButtons(isRunning) {
+    document.getElementById("startButton").style.display = isRunning ? "none" : "inline";
+    document.getElementById("cancelButton").style.display = isRunning ? "inline" : "none";
 }

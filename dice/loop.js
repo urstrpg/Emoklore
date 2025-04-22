@@ -1,4 +1,6 @@
-import { setInputsDisabled } from '../util/input.js';
+import { setInputsDisabled, toggleButtons } from '../util/input.js';
+import { updateProgress, resetProgress, hideProgress, setAverageDamage } from '../util/ui.js';
+
 import { validateInputs } from '../validate/validate.js';
 import { skillRoll } from './skillDice.js';
 
@@ -20,18 +22,11 @@ let isCancelled = false;
 export function cancelLoop() {
     isCancelled = true;
 
-    // キャンセル後の表示処理
-    const progressBar = document.getElementById('progressBar');
-
-    // プログレスバーを隠す
-    progressBar.style.display = "none";
-
-    // 進行状況テキストを更新
-    progressText.textContent = "キャンセルされました。";
+    // プログレスバー非表示とテキスト更新
+    hideProgress();
 
     // ボタン切り替え
-    document.getElementById("cancelButton").style.display = "none";
-    document.getElementById("startButton").style.display = "inline";
+    toggleButtons(false);
 }
 
 /**
@@ -44,15 +39,13 @@ export function loop() {
     // 入力が不正の場合中断
     if (!validateInputs()) return 0;
 
+    const loopCount = parseInt(document.getElementById('loopCount').value, 10);
+
     // 入力枠を非活性
     setInputsDisabled(true);
 
     // ボタン切り替え
-    document.getElementById("startButton").style.display = "none";
-    document.getElementById("cancelButton").style.display = "inline";
-
-    const loopCount = parseInt(document.getElementById('loopCount').value, 10);
-    if (isNaN(loopCount) || loopCount <= 0) return;
+    toggleButtons(true);
 
     let sumDamage = 0;
     let count = 0;
@@ -63,16 +56,13 @@ export function loop() {
     const avrOutput = document.getElementById('avrDamage');
 
     // 初期設定
-    progressBar.style.display = "block";
-    progressBar.value = 0;
-    progressText.textContent = "0% 完了";
-    avrOutput.textContent = "---";
+    resetProgress();
+    setAverageDamage("---");
 
     // 入力回数ダメージを算出
     function runBatch() {
         if (isCancelled) {
-            progressText.textContent = "キャンセルされました。";
-            progressBar.style.display = "none";
+            hideProgress();
             return;
         }
 
@@ -84,8 +74,7 @@ export function loop() {
         }
 
         const percent = Math.floor((count / loopCount) * 100);
-        progressBar.value = percent;
-        progressText.textContent = `${percent}% 完了`;
+        updateProgress(percent);
 
         if (count < loopCount) {
             setTimeout(runBatch, 0);
@@ -93,12 +82,11 @@ export function loop() {
 
             // ダメージの平均値を算出
             const avg = (sumDamage / loopCount).toFixed(2);
-            avrOutput.textContent = avg;
-            progressText.textContent = "完了！";
+            setAverageDamage(avg);
+            hideProgress("完了！");
 
             // ボタン切り替え
-            document.getElementById("cancelButton").style.display = "none";
-            document.getElementById("startButton").style.display = "inline";
+            toggleButtons(false);
 
             // 入力枠を有効化
             setInputsDisabled(false);
