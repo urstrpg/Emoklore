@@ -1,0 +1,163 @@
+/**
+ * ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
+ * 
+ * 更新履歴
+ * No001 2025/0/22 うるす
+ * 
+ * △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
+ */
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: sans-serif;
+    background-color: #fff;
+}
+
+header,
+footer {
+    padding: 15px 15px;
+    background-color: #f0f0f0;
+    text-align: center;
+    font-size: 1rem;
+    color: #444;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+#sidebar-placeholder {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.main-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+
+#header-placeholder,
+#footer-placeholder {
+    width: 100%;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 30px 20px;
+}
+
+
+.section {
+    margin-bottom: 30px;
+}
+
+h3 {
+    text-indent: 1em;
+}
+
+h4 {
+    text-indent: 2em;
+}
+
+button {
+    text-align: center;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.playerBlock {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+    margin-left: 3em;
+}
+
+#avrDamage {
+    margin-left: 2em;
+    white-space: pre-line;
+    font-weight: bold;
+    font-size: large;
+}
+
+#errorDiv {
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 2em;
+}
+
+#progressText {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 2em;
+}
+
+#progressBar {
+    width: 100%;
+    max-width: 700px;
+    margin-left: 2em;
+}
+
+.page-section {
+    display: none;
+}
+
+.page-section.active {
+    display: block;
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-left: 1px solid #ccc;
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar li {
+    margin-bottom: 10px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: #333;
+}
+
+.developer {
+    margin-left: 3em;
+}
+
+.list {
+    margin-left: 2em;
+}
+
+#footer-placeholder {
+    margin-top: auto;
+}

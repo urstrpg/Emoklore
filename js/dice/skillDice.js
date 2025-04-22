@@ -1,37 +1,32 @@
+import { damageRoll } from './damage.js';
 
 // ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 /**
  * 更新履歴
- * No001 2025/0/ うるす
+ * No001 2025/0/22 うるす
  */
 // △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 
-// ***************************************************
 /**
  * 技能判定
+ * @param {HTMLElement} playerBlock - .playerBlock 要素
+ * @returns {number} damage
  */
-// ***************************************************
-
-// 技能判定
-function skillRoll() {
-
-  // 入力が不正の場合中断
-  if (!validateInputs()) return;
-
-  const level = parseInt(document.getElementById('level').value);
-  const judge = parseInt(document.getElementById('judge').value);
+export function skillRoll(playerBlock) {
+  const level = parseInt(playerBlock.querySelector('.level').value, 10);
+  const judge = parseInt(playerBlock.querySelector('.judge').value, 10);
+  const attackType = playerBlock.querySelector('.attackType').value;
+  let damage = 0;
 
   // 成功数を算出
   const successes = rollDice(level, judge);
-  document.getElementById('successes').textContent = successes;
 
   // 成功数が0以下の時、処理をスキップ
-  let damage = 0;
   if (successes > 0) {
 
     // 選択した技能によって技能攻撃力を決定
     let skillAttackPower = 0
-    switch (document.getElementById('attackType').value) {
+    switch (attackType) {
       case 'martialArts':
         skillAttackPower = 3;
         break;
@@ -43,21 +38,25 @@ function skillRoll() {
     }
 
     // ダメージを算出
-    damage = damageRoll(successes, skillAttackPower);
+    damage = damageRoll(successes, skillAttackPower, playerBlock);
+
+    // 〈★奥義〉で連撃を適用する場合、ダブル成功以上でもう一度ダメージを算出
+    const rengeki = playerBlock.querySelector('#rengekiFlg');
+    if (attackType === 'mystery' && successes >= 2 && rengeki?.checked) {
+      damage += damageRoll(successes, skillAttackPower, playerBlock);
+    }
   }
 
-  document.getElementById('damage').textContent = damage;
+  // ダメージを返却
+  return damage;
 }
 
-
-// ***************************************************
 /**
  * 成功数算出
- * @param { 技能レベル } level
- * @param { 判定値 } judge
+ * @param {level} level
+ * @param {judge} judge
+ * @returns {successes} successes
  */
-// ***************************************************
-
 function rollDice(level, judge) {
   let successes = 0;
 
