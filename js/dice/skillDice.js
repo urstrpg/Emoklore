@@ -9,22 +9,24 @@ import { damageRoll } from './damage.js';
 
 /**
  * 技能判定
- * @returns damage
+ * @param {HTMLElement} playerBlock - .playerBlock 要素
+ * @returns {number} damage
  */
-export function skillRoll() {
-  const level = parseInt(document.getElementById('level').value, 10);
-  const judge = parseInt(document.getElementById('judge').value, 10);
+export function skillRoll(playerBlock) {
+  const level = parseInt(playerBlock.querySelector('.level').value, 10);
+  const judge = parseInt(playerBlock.querySelector('.judge').value, 10);
+  const attackType = playerBlock.querySelector('.attackType').value;
+  let damage = 0;
 
   // 成功数を算出
   const successes = rollDice(level, judge);
 
   // 成功数が0以下の時、処理をスキップ
-  let damage = 0;
   if (successes > 0) {
 
     // 選択した技能によって技能攻撃力を決定
     let skillAttackPower = 0
-    switch (document.getElementById('attackType').value) {
+    switch (attackType) {
       case 'martialArts':
         skillAttackPower = 3;
         break;
@@ -36,11 +38,12 @@ export function skillRoll() {
     }
 
     // ダメージを算出
-    damage = damageRoll(successes, skillAttackPower);
+    damage = damageRoll(successes, skillAttackPower, playerBlock);
 
     // 〈★奥義〉で連撃を適用する場合、ダブル成功以上でもう一度ダメージを算出
-    if (successes >= 2 && skillAttackPower == 6 && document.getElementById('rengekiFlg')?.checked) {
-      damage += damageRoll(successes, skillAttackPower);
+    const rengeki = playerBlock.querySelector('#rengekiFlg');
+    if (attackType === 'mystery' && successes >= 2 && rengeki?.checked) {
+      damage += damageRoll(successes, skillAttackPower, playerBlock);
     }
   }
 
@@ -48,12 +51,11 @@ export function skillRoll() {
   return damage;
 }
 
-
 /**
  * 成功数算出
- * @param { 技能レベル } level
- * @param { 判定値 } judge
- * @returns successes
+ * @param {level} level
+ * @param {judge} judge
+ * @returns {successes} successes
  */
 function rollDice(level, judge) {
   let successes = 0;

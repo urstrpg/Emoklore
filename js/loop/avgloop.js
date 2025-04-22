@@ -2,7 +2,7 @@ import { setInputsDisabled, toggleButtons } from '../util/input.js';
 import { updateProgress, resetProgress, hideProgress, setAverageDamage } from '../util/ui.js';
 
 import { validateInputs } from '../validate/validate.js';
-import { skillRoll } from './skillDice.js';
+import { skillRoll } from '../dice/skillDice.js';
 
 // ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 /**
@@ -27,12 +27,15 @@ export function cancelLoop() {
 
     // ボタン切り替え
     toggleButtons(false);
+
+    // 入力枠を再活性
+    setInputsDisabled(false);
 }
 
 /**
  * ループ処理
  */
-export function loop() {
+export function avgloop() {
     // キャンセルフラグをリセット
     isCancelled = false;
 
@@ -41,19 +44,22 @@ export function loop() {
 
     const loopCount = parseInt(document.getElementById('loopCount').value, 10);
 
+    const playerBlocks = Array.from(document.querySelectorAll('.playerBlock'));
+    if (playerBlocks.length === 0) return;
+
     // 入力枠を非活性
     setInputsDisabled(true);
 
     // ボタン切り替え
     toggleButtons(true);
 
-    let sumDamage = 0;
-    let count = 0;
+    const playerCount = playerBlocks.length;
+    const damageSums = Array(playerCount).fill(0);
+    const damageCounts = Array(playerCount).fill(0);
     const batchSize = 100;
 
-    const progressBar = document.getElementById('progressBar');
-    const progressText = document.getElementById('progressText');
-    const avrOutput = document.getElementById('avrDamage');
+    let count = 0;
+    let sumDamage = 0;
 
     // 初期設定
     resetProgress();
@@ -68,8 +74,15 @@ export function loop() {
 
         for (let i = 0; i < batchSize && count < loopCount; i++) {
 
-            // 算出したダメージを加算
-            sumDamage += skillRoll();
+            // 共鳴者毎にダメージを算出し加算
+            const playerIndex = count % playerCount;
+            const block = playerBlocks[playerIndex];
+            const dmg = skillRoll(block);
+            damageSums[playerIndex] += dmg;
+            damageCounts[playerIndex]++;
+
+            // 全体のダメージを合計
+            sumDamage += dmg;
             count++;
         }
 
@@ -83,7 +96,15 @@ export function loop() {
             // ダメージの平均値を算出
             const avg = (sumDamage / loopCount).toFixed(2);
             setAverageDamage(avg);
-            hideProgress("完了！");
+
+            // 各共鳴者の合計と平均を表示
+            const perPlayerStats = damageSums.map((sum, i) => {
+                const avg = damageCounts[i] > 0 ? (sum / damageCounts[i]).toFixed(2) : "N/A";
+                return `共鳴者${i + 1} 合計： ${damageSums[i]} / 平均：${avg}`;
+            });
+
+            // 全体の平均と合計を表示
+            setAverageDamage(`全共鳴者 合計：${sumDamage} / 平均：${avg}<br>${perPlayerStats.join("<br>")}`);
 
             // ボタン切り替え
             toggleButtons(false);

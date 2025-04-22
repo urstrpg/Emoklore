@@ -31,7 +31,7 @@ export function resetProgress() {
 
 /**
  * プログレスバー取消
- * @param { メッセージ } message
+ * @param {message} message
  */
 export function hideProgress(message = "キャンセルされました。") {
     const progressBar = document.getElementById('progressBar');
@@ -43,10 +43,10 @@ export function hideProgress(message = "キャンセルされました。") {
 
 /**
  * 平均ダメージを出力
- * @param { 出力値 } value
+ * @param {value} value
  */
 export function setAverageDamage(value) {
     const avrOutput = document.getElementById('avrDamage');
-    avrOutput.textContent = value ?? "---";
+    if (avrOutput) avrOutput.innerHTML = value ?? "---";
 }
 

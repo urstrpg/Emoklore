@@ -14,8 +14,8 @@ import { randomInt } from '../util/util.js';
  * @param { 技能攻撃力 } skillAttackPower
  * @returns damage
  */
-export function damageRoll(successes, skillAttackPower) {
-  const str = getActiveStrValue();
+export function damageRoll(successes, skillAttackPower, playerBlock) {
+  const activeStr = getActiveStrValue(playerBlock);
 
   // 技能ダメージを算出
   let damage = 0
@@ -26,18 +26,15 @@ export function damageRoll(successes, skillAttackPower) {
   }
 
   // 武器攻撃力を加算
-  const weaponDamage = weaponDamageRoll(getActiveWeaponAttackPower());
+  const weaponDamage = weaponDamageRoll(getActiveWeaponAttackPower(playerBlock));
   damage += weaponDamage;
 
-  // 〈ストレングス〉の技能レベルが1～3の場合、ダメージを加算
-  if (1 <= str && str <= 3) {
-    damage += str
-  }
+  // 〈ストレングス〉の技能レベルを加算
+  damage += activeStr
 
   // ダメージを返却
   return damage;
 }
-
 
 /**
  * 技能ダメージ算出
@@ -59,7 +56,6 @@ function skillDamageRoll(successes, skillAttackPower) {
   // ダメージを返却
   return skillDamage;
 }
-
 
 /**
  * 武器攻撃力算出
