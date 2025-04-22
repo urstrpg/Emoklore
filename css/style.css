@@ -157,3 +157,7 @@ button {
 .list {
     margin-left: 2em;
 }
+
+#footer-placeholder {
+    margin-top: auto;
+}
