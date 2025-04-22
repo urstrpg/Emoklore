@@ -8,15 +8,12 @@ import { randomInt } from '../util/util.js';
  */
 // △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 
-// ***************************************************
 /**
  * ダメージ算出
  * @param { 成功数 } successes
  * @param { 技能攻撃力 } skillAttackPower
+ * @returns damage
  */
-// ***************************************************
-
-// ダメージ算出
 export function damageRoll(successes, skillAttackPower) {
   const str = getActiveStrValue();
 
@@ -42,20 +39,19 @@ export function damageRoll(successes, skillAttackPower) {
 }
 
 
-// ***************************************************
 /**
  * 技能ダメージ算出
  * @param { 成功数 } successes
  * @param { 技能攻撃力 } skillAttackPower
+ * @returns skillDamage
  */
-// ***************************************************
 function skillDamageRoll(successes, skillAttackPower) {
   let skillDamage = 0;
 
   // 成功数の回数ダイスロールを行い、技能のダメージを算出
   for (let i = 0; i < successes; i++) {
 
-    // 【成功数】D
+    // 【成功数】D【技能攻撃力】
     const roll = randomInt(skillAttackPower);
     skillDamage += roll;
   }
@@ -65,13 +61,11 @@ function skillDamageRoll(successes, skillAttackPower) {
 }
 
 
-// ***************************************************
 /**
  * 武器攻撃力算出
  * @param { 武器攻撃力 } weaponAttackPower
- * @returns damage
+ * @returns weaponDamage
  */
-// ***************************************************
 function weaponDamageRoll(weaponAttackPower) {
   weaponAttackPower = weaponAttackPower.trim();
 
@@ -82,7 +76,6 @@ function weaponDamageRoll(weaponAttackPower) {
 
   // "1D2"等の武器攻撃力の入力を、Dを起点に左右に分割
   const [left, right] = weaponAttackPower.toUpperCase().split('D');
-
   const roll = parseInt(left, 10);
   const dice = parseInt(right, 10);
 
@@ -90,10 +83,11 @@ function weaponDamageRoll(weaponAttackPower) {
   if (isNaN(roll) || isNaN(dice)) return 0;
 
   // ダメージを算出
-  let damage = 0;
+  let weaponDamage = 0;
   for (let i = 0; i < roll; i++) {
-    damage += randomInt(dice);
+    weaponDamage += randomInt(dice);
   }
 
-  return damage;
+  // ダメージを返却
+  return weaponDamage;
 }

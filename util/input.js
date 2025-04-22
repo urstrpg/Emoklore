@@ -1,18 +1,15 @@
 
 // ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 /**
- * 更新履歴
- * No001 2025/0/ うるす
+ *  更新履歴
+ *  No001 2025/0/ うるす
  */
 // △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 
-// ***************************************************
 /**
- * 入力制御
+ * 武器攻撃力の入力制御
+ * @returns value
  */
-// ***************************************************
-
-// 武器攻撃力
 export function getActiveWeaponAttackPower() {
     const selected = document.getElementById("attackType").value;
     const field = document.querySelector(`#${selected}Fields input[id="weaponAttackPower"]`);
@@ -24,7 +21,10 @@ export function getActiveWeaponAttackPower() {
     return value;
 }
 
-// 〈ストレングス〉の技能レベル
+/**
+ * 〈ストレングス〉の技能レベル
+ * @returns value
+ */
 export function getActiveStrValue() {
     const selected = document.getElementById("attackType").value;
     const field = document.querySelector(`#${selected}Fields input[id="str"]`);
@@ -36,10 +36,13 @@ export function getActiveStrValue() {
     return value;
 }
 
-// ループ中、入力枠を非活性にする
+/**
+ * ループ中、入力枠を非活性にする
+ */
 export function setInputsDisabled(disabled) {
     const inputs = document.querySelectorAll('input, select, button');
     inputs.forEach(input => {
+
         // 「キャンセル」ボタンだけは無効化しない or 有効化しないように調整
         if (input.id !== 'cancelButton') {
             input.disabled = disabled;

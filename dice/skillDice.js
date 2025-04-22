@@ -7,13 +7,10 @@ import { damageRoll } from './damage.js';
  */
 // △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 
-// ***************************************************
 /**
  * 技能判定
+ * @returns damage
  */
-// ***************************************************
-
-// 技能判定
 export function skillRoll() {
   const level = parseInt(document.getElementById('level'));
   const judge = parseInt(document.getElementById('judge'));
@@ -53,14 +50,12 @@ export function skillRoll() {
 }
 
 
-// ***************************************************
 /**
  * 成功数算出
  * @param { 技能レベル } level
  * @param { 判定値 } judge
+ * @returns successes
  */
-// ***************************************************
-
 function rollDice(level, judge) {
   let successes = 0;
 

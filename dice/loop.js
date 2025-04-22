@@ -1,4 +1,6 @@
 import { setInputsDisabled } from '../util/input.js';
+import { validateInputs } from '../validate/validate.js';
+import { skillRoll } from './skillDice.js';
 
 // ▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽▽
 /**
@@ -7,15 +9,14 @@ import { setInputsDisabled } from '../util/input.js';
  */
 // △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 
-// ***************************************************
 /**
- * ループ処理
+ * 初期化
  */
-// ***************************************************
-
 let isCancelled = false;
 
-// キャンセル処理
+/**
+ * キャンセル処理
+ */
 export function cancelLoop() {
     isCancelled = true;
 
@@ -33,8 +34,9 @@ export function cancelLoop() {
     document.getElementById("startButton").style.display = "inline";
 }
 
-
-// ループ処理
+/**
+ * ループ処理
+ */
 export function loop() {
     // キャンセルフラグをリセット
     isCancelled = false;

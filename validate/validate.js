@@ -6,40 +6,52 @@
  */
 // △△△△△△△△△△△△△△△△△△△△△△△△△△△△△
 
-// ***************************************************
-/**
- * バリデーション
- */
-// ***************************************************
 
-// バリデーション関数
+/**
+ * バリデーション：エラー表示
+ * @param { メッセージ } message
+ */
 export function showError(message) {
     const errorDiv = document.getElementById('errorDiv');
     if (errorDiv) {
-        // エラーメッセージを初期化
-        errorDiv.textContent = '';
-
         // エラーメッセージをHTMLに表示
         errorDiv.textContent = message;
     }
 }
 
-// バリデーションチェック
+
+/**
+ * バリデーション：数値が1～maxの正の整数かチェック
+ * @param { 入力値 } value
+ * @param { 最大値 } max
+ */
+function isValidPositiveIntegerInRange(value, max) {
+    return /^[1-9][0-9]*$/.test(value) && parseInt(value, 10) <= max;
+}
+
+/**
+ * バリデーション：ダイス表記（例：2D6）または正の整数かチェック
+ * @param { 入力値 } value
+ */
+function isValidWeaponFormat(value) {
+    return /^([1-9][0-9]*|[1-9][0-9]*[dD][1-9][0-9]*)$/.test(value);
+}
+
+/**
+ * 入力チェック関数
+ * @returns
+ */
 export function validateInputs() {
-
-    // エラーメッセージの初期化
-    const errorDiv = document.getElementById('errorDiv');
-    if (errorDiv) {
-        errorDiv.textContent = '';
-    }
-
     const attackType = document.getElementById('attackType').value;
-    const level = parseInt(document.getElementById('level').value);
-    const judge = parseInt(document.getElementById('judge').value);
-    const str = parseInt(document.getElementById('str').value);
-    const weapon = document.getElementById('weaponAttackPower').value.trim();
+    const level = document.getElementById('level').value;
+    const judge = document.getElementById('judge').value;
+    const strField = document.querySelector(`#${attackType}Fields input[id="str"]`);
+    const str = strField ? strField.value : "";
+    const weaponField = document.querySelector(`#${attackType}Fields input[id="weaponAttackPower"]`);
+    const weapon = weaponField ? weaponField.value.trim() : "";
 
-    const weaponRegex = /^[0-9]+([Dd][0-9]+)?$/;
+    // エラー初期化
+    showError("");
 
     // 攻撃種別のチェック
     if (!attackType || attackType === "none") {
@@ -47,27 +59,27 @@ export function validateInputs() {
         return false;
     }
 
-    // 技能レベルのチェック
-    if (isNaN(level) || level < 1 || level > 3) {
-        showError("技能レベルは1～3の整数で入力してください。");
+    // 技能レベルのチェック（1～3の正の整数）
+    if (!isValidPositiveIntegerInRange(level, 3)) {
+        showError("技能レベルは1～3の正の整数で入力してください。");
         return false;
     }
 
-    // 判定値のチェック
-    if (isNaN(judge) || judge < 1 || judge > 9) {
-        showError("判定値は1～9の整数で入力してください。");
+    // 判定値のチェック（1～9の正の整数）
+    if (!isValidPositiveIntegerInRange(judge, 9)) {
+        showError("判定値は1～9の正の整数で入力してください。");
         return false;
     }
 
-    // ストレングスのチェック
-    if (isNaN(str) || str < 1 || str > 3) {
-        showError("〈ストレングス〉の技能レベルは1～3の整数で入力してください。");
+    // ストレングスのチェック（存在する場合のみ）
+    if (strField && !isValidPositiveIntegerInRange(str, 3)) {
+        showError("〈ストレングス〉の技能レベルは1～3の正の整数で入力してください。");
         return false;
     }
 
-    // 武器攻撃力のチェック
-    if (!weaponRegex.test(weapon)) {
-        showError("武器攻撃力は数字とD（例：2D6、5）で入力してください。");
+    // 武器攻撃力のチェック（存在する場合のみ）
+    if (weaponField && !isValidWeaponFormat(weapon)) {
+        showError("武器攻撃力は正の整数またはダイス形式（例：2D6、1D2）で入力してください。");
         return false;
     }
 
